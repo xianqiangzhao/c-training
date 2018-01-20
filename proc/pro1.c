@@ -2,27 +2,19 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
-
+#include <pwd.h>
 int
 main(void)
 {
 	pid_t	pid;
-
 	if ((pid = fork()) < 0) {
 		perror("fork error");
 	} else if (pid == 0) {		/* first child */
-		// if ((pid = fork()) < 0)
-		// 	perror("fork error");
-		// else if (pid > 0)
-		// 	exit(0);	/* parent from second fork == first child */
-
-		/*
-		 * We're the second child; our parent becomes init as soon
-		 * as our real parent calls exit() in the statement above.
-		 * Here's where we'd continue executing, knowing that when
-		 * we're done, init will reap our status.
-		 */
-		sleep(2);
+		//进程的执行用户修改	 
+ 		struct passwd *user;
+	    user = getpwnam("nobody");	    
+	    setuid(user->pw_uid);
+		sleep(10);
 		printf("second child, parent pid = %ld\n", (long)getppid());
 		exit(0);
 	}
@@ -31,9 +23,6 @@ main(void)
 		perror("waitpid error");
 	printf("%d %d\n",pid,getpid());
 
-	/*
-	 * We're the parent (the original process); we continue executing,
-	 * knowing that we're not the parent of the second child.
-	 */
+	 
 	exit(0);
 }

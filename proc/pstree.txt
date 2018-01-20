@@ -1,0 +1,60 @@
+pstree 显示进程结构
+
+[root@MiWiFi-R3-srv fileio]# pstree
+init─┬─abrtd
+     ├─acpid
+     ├─atd
+     ├─auditd───{auditd}
+     ├─automount───4*[{automount}]
+     ├─certmonger
+     ├─console-kit-dae───63*[{console-kit-da}]
+     ├─crond
+     ├─cupsd
+     ├─dbus-daemon───{dbus-daemon}
+     ├─dhclient
+     ├─hald─┬─hald-runner─┬─hald-addon-acpi
+     │      │             └─hald-addon-inpu
+     │      └─{hald}
+     ├─login───bash
+     ├─5*[mingetty]
+     ├─nginx───nginx
+     ├─php-fpm───2*[php-fpm]
+     ├─rpc.statd
+     ├─rpcbind
+     ├─rsyslogd───3*[{rsyslogd}]
+     ├─smbd───2*[smbd]
+     ├─sshd───sshd───bash─┬─fget
+     │                    └─pstree
+     └─udevd───2*[udevd]
+
+pro1 启动后
+
+init─┬─abrtd
+     ├─acpid
+     ├─atd
+     ├─auditd───{auditd}
+     ├─automount───4*[{automount}]
+     ├─certmonger
+     ├─console-kit-dae───63*[{console-kit-da}]
+     ├─crond
+     ├─cupsd
+     ├─dbus-daemon───{dbus-daemon}
+     ├─dhclient
+     ├─hald─┬─hald-runner─┬─hald-addon-acpi
+     │      │             └─hald-addon-inpu
+     │      └─{hald}
+     ├─login───bash
+     ├─5*[mingetty]
+     ├─nginx───nginx
+     ├─php-fpm───2*[php-fpm]
+     ├─rpc.statd
+     ├─rpcbind
+     ├─rsyslogd───3*[{rsyslogd}]
+     ├─smbd───2*[smbd]
+     ├─sshd───sshd───bash─┬─fget
+     │                    ├─pro1───pro1
+     │                    └─pstree
+     └─udevd───2*[udevd]
+
+
+可以看到 pro1 父进程和字进程 pro1

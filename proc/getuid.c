@@ -4,7 +4,7 @@
 main()
 {
     struct passwd *user;
-    user = getpwnam("nobody22");
+    user = getpwnam("nobody");
     printf("name:%s\n", user->pw_name);
     printf("uid:%d\n", user->pw_uid);
     printf("home:%s\n", user->pw_dir);
