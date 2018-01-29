@@ -14,7 +14,7 @@ static int handled = 0;
 static void handler(int sig) {
     crypt(str2, "xx");
     handled++;
-    sleep(20);
+    //sleep(20);
     printf("catch sinale %d\n", handled);
 }
 
