@@ -5,11 +5,13 @@
 #include <setjmp.h>
 
 static  jmp_buf  env_alrm;
- 
+sigset_t pendmask;
+
 static void sig_alrm(int signo) {
 	printf("get sig_alarm\n");
-	exit(0);
-	//longjmp(env_alrm, 1);
+
+	longjmp(env_alrm, 1);
+	 //exit(0);
 	
 }  
  unsigned
@@ -21,6 +23,7 @@ static void sig_alrm(int signo) {
 		alarm(sec);
 		pause();
 	}
+	
 	return (alarm(0));
 
 }
@@ -45,6 +48,7 @@ int main(int argc, char const *argv[])
 		perror("install sigint error");
 	unslept = sleep2(5);
 	printf("sleep2 return:%u\n", unslept);
+	
   	return 0;
 
 }
