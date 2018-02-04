@@ -5,7 +5,15 @@
 #include <setjmp.h>
 #include <time.h>
 #include <errno.h>
+/*
+sigsuspend(const sigset_t *mask);
+是一个原子操作
+相当于
+ sigprocmask(SIG_SETMASK, &mask, &prevMask);
+ pause();
+ sigprocmask(SIG_SETMASK, &prevMask, NULL);
 
+*/
 
 void pr_mask(const char *str) {
 	sigset_t sigset;
