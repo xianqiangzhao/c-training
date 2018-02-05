@@ -4,7 +4,7 @@
 #include <stdlib.h>
  
  
-static  int i =0;
+static  int i =0; //
 static void signalHandler(int sig) {
 	if (sig == SIGINT) {
 		printf("  sigint \n");
