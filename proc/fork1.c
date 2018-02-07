@@ -44,7 +44,7 @@ int main(int argc, char const *argv[])
 	
 	 
 	pid_t pid;
-	int forknum = 1;
+	int forknum = 4;
 	int child; 
 	setbuf(stdout, NULL);
 	for(; forknum > 0 ;forknum--) {
@@ -54,7 +54,9 @@ int main(int argc, char const *argv[])
 				perror("error");
 				break;
 			case 0:			 
-				istack *=2;			 
+				istack *=2;	
+				sleep(10);
+				exit(0);		 
 				break;
 			default:
 			 
@@ -66,7 +68,6 @@ int main(int argc, char const *argv[])
 	  	 (pid == 0 ? "(child)" : "parent"),  istack);
 		continue;
 	}
-	// //sleep(10);
 	printf("pid = %d ppid =%d %s   istack=%d \n ", getpid(),getppid(),
 	  	 (pid == 0 ? "(child)" : "parent"),   istack);
 	exit(0);
