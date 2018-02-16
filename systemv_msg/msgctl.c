@@ -42,6 +42,9 @@ int main()
     printf("read-write: %03o,cbytes = %lu,qnum =%lu,qbytes = %lu\n",
            info.msg_perm.mode & 0777,(ulong_t) info.msg_cbytes,
            (ulong_t) info.msg_qnum,(ulong_t) info.msg_qbytes);
+    memset(&buf, 0, sizeof(buf));
+    msgrcv(msqid, &buf, sizeof(buf), 1, IPC_NOWAIT);
+    printf("read msg = %s\n", buf.mtext);
     system("ipcs -q");
     if(msgctl(msqid,IPC_RMID,NULL) == -1)
      {
