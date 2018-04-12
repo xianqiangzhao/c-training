@@ -1,3 +1,5 @@
+//gcc  count.c -o  count  -lrt -pthread
+ 
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -16,10 +18,10 @@ int main(int argc, char const *argv[])
 	sem_t mutex;
 	sem_init(&mutex, 1, 1);
 	setbuf(stdout, NULL);
-	count = mmap(NULL, sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANON, -1, 0);
+	count = mmap(NULL, 1024 * 1024 * 40, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANON, -1, 0);
 	if (fork() == 0) {
 		int i;
-		for (i = 0; i < nloop; i++) {sleep(1);
+		for (i = 0; i < nloop; i++) {//usleep(2);
 			//sem_wait(&mutex);
 			printf("child count = %d \n" , (*count)++);
 			//sem_post(&mutex);
@@ -28,7 +30,7 @@ int main(int argc, char const *argv[])
 
 	} else {
 		int i;
-		for (i = 0; i < nloop; i++) {sleep(1);
+		for (i = 0; i < nloop; i++) {//usleep(2);
 			//sem_wait(&mutex);
 			printf("parent count = %d \n" , (*count)++);
 			//sem_post(&mutex);
@@ -36,6 +38,7 @@ int main(int argc, char const *argv[])
 
 
 	}
+	sleep(20);
 	wait(NULL);
  	return 0;
 }
