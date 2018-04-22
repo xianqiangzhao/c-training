@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <sys/times.h>
+#include <unistd.h>
 
 int  main(int argc, char const *argv[])
 {
@@ -26,5 +28,18 @@ int  main(int argc, char const *argv[])
 	now = time(NULL);
 	timenow = localtime(&now);
 	printf("recent time is : %s \n", asctime(timenow));
+	int i = 0;
+	clock_t cl1, cl2, cl1_2, cl2_1;
+	cl1 = clock();
+	cl2 = times(NULL);
+	while(i < 100000000)
+		i++;
+	//sleep(2);
+	cl2_1 = times(NULL);
+	cl1_2 = clock();
+	printf("clock = %ld CLOCKS_PER_SEC= %ld  sysconf(_SC_CLK_TCK)=%ld\n", cl1, CLOCKS_PER_SEC,  sysconf(_SC_CLK_TCK));
+	printf("cl1 = %ld cl1_2= %ld cl2= %ld  cl2_1=%ld\n", cl1, cl1_2,  cl2,  cl2_1);
+
+
 	return 0;
 }
