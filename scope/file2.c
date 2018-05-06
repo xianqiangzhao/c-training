@@ -2,7 +2,8 @@
 
 extern  struct mem  pool; //belong of file.h
 extern  int size; //belong of file.h
-extern  printsize(); //belong of file.c 
+extern  printsize(); //belong of file.c
+
 int a = 100;
 int main(int argc, char const *argv[])
 {
@@ -39,7 +40,12 @@ int main(int argc, char const *argv[])
      printf("limit = %d\n", limit);
 	 printf("limitp = %d\n", *limitp);
 
-
-
+     //string reversal
+     char buf[] = {"ab"}; 
+     char *conp = "zxqef";
+     //*conp = 'd'; Segmentation fault.
+     char *p = buf;
+     entostart(p);
+     printf("entostart = %s\n", p);
 	return 0;
 }
