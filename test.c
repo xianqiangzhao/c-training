@@ -14,11 +14,48 @@
 #else
 #define sw_atomic_cpu_pause()
 #endif
-#define SW_SPINLOCK_LOOP_N               1024000000
+#define SW_SPINLOCK_LOOP_N               1024
+
 /*
 a point test
 */
- 
+static inline unsigned long swoole_hash_php(char *key, int len)
+{
+    register unsigned long hash = 5381;
+    /* variant with the hash unrolled eight times */
+    for (; len >= 8; len -= 8)
+    {
+        hash = ((hash << 5) + hash) + *key++;
+        hash = ((hash << 5) + hash) + *key++;
+        hash = ((hash << 5) + hash) + *key++;
+        hash = ((hash << 5) + hash) + *key++;
+        hash = ((hash << 5) + hash) + *key++;
+        hash = ((hash << 5) + hash) + *key++;
+        hash = ((hash << 5) + hash) + *key++;
+        hash = ((hash << 5) + hash) + *key++;
+    }
+
+    switch (len)
+    {
+        case 7: hash = ((hash << 5) + hash) + *key++; /* fallthrough... */
+        /* no break */
+        case 6: hash = ((hash << 5) + hash) + *key++; /* fallthrough... */
+        /* no break */
+        case 5: hash = ((hash << 5) + hash) + *key++; /* fallthrough... */
+        /* no break */
+        case 4: hash = ((hash << 5) + hash) + *key++; /* fallthrough... */
+        /* no break */
+        case 3: hash = ((hash << 5) + hash) + *key++; /* fallthrough... */
+        /* no break */
+        case 2: hash = ((hash << 5) + hash) + *key++; /* fallthrough... */
+        /* no break */
+        case 1: hash = ((hash << 5) + hash) + *key++; break;
+        case 0: break;
+        default: break;
+    }
+    return hash;
+}
+
 int main(){
   
   typedef struct
@@ -42,6 +79,8 @@ int main(){
 #elif defined(__x86_64__)
    printf("__x86_64__  \n");
 #endif 
+
+  printf("swoole_hash_php = %d\n" , swoole_hash_php("abcde", 5));
 
   return 0;
 
