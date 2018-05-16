@@ -9,6 +9,7 @@
 #include <linux/if_link.h>
 
 /*
+
 copy from http://man7.org/linux/man-pages/man3/getifaddrs.3.html
 */
 int main(int argc, char *argv[])
