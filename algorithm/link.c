@@ -59,10 +59,11 @@ node *findNode(int find)
     }
     return NULL;
 }
+
+//delete node
 int delNode(int del)
 {
-	node *p = &head;
-	 
+	node *p = &head;	 
 	while(p->next){
 		if(p->next->data == del){
 			p->next = p->next->next;
@@ -70,7 +71,7 @@ int delNode(int del)
 			p = p->next;
 		}
 	}
-
+	return OK;
 }
 
 
@@ -80,8 +81,7 @@ int main(int argc, char const *argv[])
 	initList();
     int i = 0;
 	//add node to link
-	for (; i < 100; i++)
-	{
+	for (; i < 100; i++) {
 		node *new = zmalloc(sizeof(node));
 		new->data = i;
 		add(new);
@@ -93,7 +93,7 @@ int main(int argc, char const *argv[])
 	node  *f = findNode(30);
 	if (f){
 		printf("fined %d\n", f->data);
-	}else {
+	} else {
 		printf(" not  fined \n");
 	}
 	
