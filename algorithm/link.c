@@ -5,7 +5,7 @@
 
 /*
 single link training
-2018/0/25
+2018/08/25
 */
 #define  OK 0
 #define  NG 1
