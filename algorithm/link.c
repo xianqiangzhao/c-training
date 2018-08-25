@@ -66,6 +66,7 @@ int delNode(int del)
 	node *p = &head;	 
 	while(p->next){
 		if(p->next->data == del){
+			free(p->next);
 			p->next = p->next->next;
 		} else{
 			p = p->next;
@@ -81,13 +82,13 @@ int main(int argc, char const *argv[])
 	initList();
     int i = 0;
 	//add node to link
-	for (; i < 100; i++) {
+	for (; i < 100000; i++) {
 		node *new = zmalloc(sizeof(node));
 		new->data = i;
 		add(new);
 	}
 	//print all node
-	printList();
+	//printList();
  
  	//find node
 	node  *f = findNode(30);
@@ -98,7 +99,7 @@ int main(int argc, char const *argv[])
 	}
 	
 	//delete node
-	delNode(10);
+	delNode(99999);
 	printList();
 	return 0;
 }
