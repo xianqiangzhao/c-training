@@ -33,7 +33,7 @@ main(int argc, char *argv[])
     if (sfd == -1)  
         handle_error("signalfd");  
   
-    for (;;) {  
+    for (;;) {
         s = read(sfd, &fdsi, sizeof(struct signalfd_siginfo));  
         if ( s == -1 && errno == EAGAIN) {            
             continue;
