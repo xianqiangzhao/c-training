@@ -9,9 +9,9 @@ void swap(int *data,int pos1,int pos2){
 void bubblesort(int *data,int size){
 	int i,j;
 	for(i=0;i<size-1;i++)
-		for(j=i+1;j<size;j++)
-			if(*(data+i)>*(data+j))
-				swap(data,i,j);
+		for(j=0;j<size-1-i;j++)
+			if(*(data+j)>*(data+j+1))
+				swap(data,j,j+1);
 }
 
 void displayoutcome(int *data,int size){
