@@ -20,7 +20,7 @@ int main(int argc, char const *argv[])
         fprintf(stderr, "Need at least one argument to write to the file\n");
         exit(EXIT_FAILURE);
     }
-    if ((fd = open("/tmp/data", O_RDWR | O_CREAT)) < 0)
+    if ((fd = open("data", O_RDWR | O_CREAT)) < 0)
     {
     	printf("%s\n","bad file open");
     	exit(1);
