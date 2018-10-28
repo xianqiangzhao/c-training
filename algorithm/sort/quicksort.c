@@ -12,13 +12,13 @@ void swap(int *a, int *b){
 }
 
 int partition(int a[], int left, int right){
-    int l = left;
-    int j = l;
+    int l = left;// arr[l...j-1] < v
+    int j = l;  //arr[j ... i] >= v
     int i;
-    int v =  a[l];
+    int pivot =  a[l];//基准是最左则第一个元素
     for(i = l+1; i <= right; i++)
     {
-        if (a[i] < v) {
+        if (a[i] < pivot) {
             swap(&a[i], &a[j+1]);
             j++;
         }
@@ -27,7 +27,6 @@ int partition(int a[], int left, int right){
     return j;
 
 }
-
 
 void quickSort(int a[],int left,int right)
 {
