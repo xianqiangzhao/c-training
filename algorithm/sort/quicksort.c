@@ -1,8 +1,12 @@
  #include <stdlib.h>
  #include <stdio.h>
  #include <time.h>
-
-#define  MAX 1000000
+/*
+快速排序 
+1，没有考虑重复数据情况，在这种情况，效率会地下
+2，基准值的选择不科学
+*/
+#define  MAX 100000
 
 
 void swap(int *a, int *b){
@@ -49,9 +53,9 @@ int main()
       number[i] = (rand() % MAX);/*产生MAX以内的随机整数*/
      }
      quickSort(number,0, MAX - 1); 
-    for(i=0; i< MAX; i++)
-    {
-        printf("%d ", number[i]);
-    }
+    // for(i=0; i< MAX; i++)
+    // {
+    //     printf("%d ", number[i]);
+    // }
     return 0;
 }
