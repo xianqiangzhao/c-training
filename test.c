@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 
 #define sw_atomic_cmp_set(lock, old, set) __sync_bool_compare_and_swap(lock, old, set)
 #define sw_atomic_fetch_add(value, add)   __sync_fetch_and_add(value, add)
@@ -56,6 +57,27 @@ static inline unsigned long swoole_hash_php(char *key, int len)
     return hash;
 }
 
+
+char* swoole_string_format(size_t n, const char *format, ...)
+{
+    char *buf = malloc(n);
+    if (buf == NULL)
+    {
+        return NULL;
+    }
+
+    va_list _va_list;
+    va_start(_va_list, format);
+
+    if (vsnprintf(buf, n, format, _va_list) < 0)
+    {
+        free(buf);
+        return NULL;
+    }
+
+    return buf;
+}
+
 int main(){
   
   typedef struct
@@ -81,6 +103,33 @@ int main(){
 #endif 
 
   printf("swoole_hash_php = %d\n" , swoole_hash_php("abcde", 5));
+
+  //add by 2018/08/16
+  char *mp = malloc(sizeof(char) * 10);
+  free(mp);
+  char *mp1 = malloc(sizeof(char) * 10);  
+  free(mp1);
+  int a = 10%5;
+  printf("a= %d\n", a);
+
+  typedef struct test
+  {
+    char *p;
+    int *count;
+    
+  } st;
+  st *sp = malloc(sizeof(st));
+free(sp);
+
+int modini = 0;
+for (; modini <= SW_SPINLOCK_LOOP_N*2; ++modini)
+{
+ // printf("%d / %d = %d \n" , modini, SW_SPINLOCK_LOOP_N, modini%SW_SPINLOCK_LOOP_N);
+}
+
+
+printf("%s\n", swoole_string_format(60,"zxqis%s and %s","supperman", "good"));
+
 
   return 0;
 

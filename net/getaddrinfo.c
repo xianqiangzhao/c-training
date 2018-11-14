@@ -25,8 +25,6 @@ int main(int argc, char **args) {
     addr.s_addr= ((struct sockaddr_in *)(res->ai_addr))->sin_addr.s_addr;
 
     printf("ip addres: %s\n", inet_ntoa(addr));
-
-    // 取得した情報を解放
     freeaddrinfo(res);
 
     return 0;
